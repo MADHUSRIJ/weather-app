@@ -80,9 +80,8 @@ class _GetStartedState extends State<GetStarted> {
               GestureDetector(
                 onTap: () async {
                   await getLocationPermission();
-                  print(permissionGranted);
                   if (permissionGranted) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
                   } else {
                     String status = GetUserLocation.info;
                     ScaffoldMessenger.of(context)
@@ -94,7 +93,7 @@ class _GetStartedState extends State<GetStarted> {
                   margin: const EdgeInsets.symmetric(vertical: 16),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Color(0xff395B64),
+                      color: const Color(0xff395B64),
                       borderRadius: BorderRadius.circular(16)),
                   child: Text(
                     "Get Started",

@@ -13,7 +13,6 @@ class WeatherApi{
       final response = await client.get(Uri.parse(locationApi));
       if (response.statusCode == 200) {
         List<dynamic>? coordinatesBody = json.decode(response.body);
-        print(coordinatesBody![0]['lat'].toString()+" "+coordinatesBody[0]['lon'].toString());
         responseBody = await getUsingLatLong(coordinatesBody![0]['lat'].toString(),coordinatesBody[0]['lon'].toString()) ;
         return responseBody;
       }

@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: Icon(
+          leading: const Icon(
             Icons.location_on_rounded,
             color: Colors.white60,
           ),

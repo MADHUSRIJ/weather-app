@@ -118,7 +118,7 @@ class _SearchState extends State<Search> {
                         children: [
                           CircleAvatar(
                             radius: 80,
-                            backgroundColor: Color(0xffA5C9CA),
+                            backgroundColor: const Color(0xffA5C9CA),
                             child:  Container(
                               decoration: BoxDecoration(
                                   image: DecorationImage(
