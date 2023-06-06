@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:weather_app/screens/home.dart';
-import 'package:weather_app/screens/profile.dart';
 import 'package:weather_app/screens/search.dart';
 import 'package:weather_app/screens/weather.dart';
 import 'package:weather_app/service/get_user_location.dart';
@@ -33,8 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
         _screens = [
           Home(currentWeather: weatherData!),
           const Search(),
-          const Weather(),
-          const Profile(),
+          Weather(currentWeather: weatherData!),
         ];
       });
     } catch (ex) {
@@ -63,14 +61,30 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: const Icon(
+          leading: Icon(
             Icons.location_on_rounded,
-            color: Color(0xffA5C9CA),
+            color: Colors.white60,
           ),
           title: Text(
             weatherData!['name'].toString(),
             style: GoogleFonts.poppins(fontSize: 16),
           ),
+          actions: [
+             Container(
+               margin: const EdgeInsets.symmetric(horizontal: 8),
+               child: const Icon(
+                 Icons.settings,
+                 color: Color(0xffA5C9CA),
+               ),
+             ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              child: const Icon(
+                Icons.notifications,
+                color: Color(0xffA5C9CA),
+              ),
+            ),
+          ],
         ),
         body: Center(
           child: _screens![_selectedIndex],
@@ -91,8 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.search), label: "Search"),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.assistant_navigation), label: "Weather"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.person), label: "Profile"),
                 ],
                 currentIndex: _selectedIndex,
                 showUnselectedLabels: false,

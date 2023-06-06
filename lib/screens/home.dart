@@ -34,13 +34,13 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                height: 375,
+                height: 325,
                 margin:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                 decoration: BoxDecoration(
-                    color: Colors.white12,
+                    color: const Color(0xff395B64),
                     borderRadius: BorderRadius.circular(24)),
                 alignment: Alignment.center,
                 child: Column(
@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                   children: [
                    CircleAvatar(
                      radius: 80,
-                     backgroundColor: Color(0xffA5C9CA),
+                     backgroundColor: Colors.transparent,
                      child:  Container(
                        decoration: BoxDecoration(
                            image: DecorationImage(
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.symmetric(horizontal: 6),
         decoration: BoxDecoration(
-            color: Colors.white12, borderRadius: BorderRadius.circular(12)),
+            color: Colors.white24, borderRadius: BorderRadius.circular(12)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

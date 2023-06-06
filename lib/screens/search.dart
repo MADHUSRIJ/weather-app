@@ -44,12 +44,30 @@ class _SearchState extends State<Search> {
           child: Column(
             children: [
               Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  "Pick Location",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      fontSize: 24, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  "Find the area or city that you want to know the detailed weather info at this time",
+                  textAlign: TextAlign.center,
+                  style:
+                  GoogleFonts.poppins(fontSize: 16, color: Colors.white60),
+                ),
+              ),
+              Container(
                 height: 50,
+                margin: const EdgeInsets.symmetric(vertical: 8),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                  color: Colors.white24,
+                  color: const Color(0xff395B64),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(width: 1,color: Colors.grey.shade600)
                 ),
                 alignment: Alignment.centerLeft,
                 child: TextFormField(
@@ -79,7 +97,7 @@ class _SearchState extends State<Search> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Today's Report - ${weatherData!['name']}",
+                      "Today - ${weatherData!['name']}",
                       style: GoogleFonts.poppins(
                         fontSize: 24,
                       ),

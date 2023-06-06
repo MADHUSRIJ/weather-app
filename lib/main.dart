@@ -65,7 +65,7 @@ class _GetStartedState extends State<GetStarted> {
                   "Discover the Weather in Your City",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
-                      fontSize: 32, fontWeight: FontWeight.w600),
+                      fontSize: 28, fontWeight: FontWeight.w600),
                 ),
               ),
               Container(
@@ -74,7 +74,7 @@ class _GetStartedState extends State<GetStarted> {
                   "Get to know your weather maps and precipitation forecast",
                   textAlign: TextAlign.center,
                   style:
-                      GoogleFonts.poppins(fontSize: 20, color: Colors.white60),
+                      GoogleFonts.poppins(fontSize: 16, color: Colors.white60),
                 ),
               ),
               GestureDetector(
