@@ -30,16 +30,15 @@ class _MyHomePageState extends State<MyHomePage> {
       Map<String, dynamic> data = await WeatherApi.getUsingLatLong(GetUserLocation.currentPosition!.latitude.toString(), GetUserLocation.currentPosition!.longitude.toString());
       setState(() {
         weatherData = data;
-        print(weatherData);
         _screens = [
           Home(currentWeather: weatherData!),
-          Search(),
-          Weather(),
-          Profile(),
+          const Search(),
+          const Weather(),
+          const Profile(),
         ];
       });
     } catch (ex) {
-      print('Error: $ex');
+      throw Exception('Home error: ${ex.toString()}');
     }
   }
 

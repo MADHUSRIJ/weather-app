@@ -29,7 +29,6 @@ class GetUserLocation{
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
       currentAddress = '${place.subAdministrativeArea} - ${place.postalCode}';
-      print("Address ${currentAddress}");
     }).catchError((ex) {
       throw Exception('Current Address error: ${ex.toString()}');
     });
