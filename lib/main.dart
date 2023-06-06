@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app/screens/home.dart';
-import 'package:weather_app/screens/profile.dart';
-import 'package:weather_app/screens/search.dart';
-import 'package:weather_app/screens/weather.dart';
-import 'package:weather_app/service/getWeatherApi.dart';
+
+import 'package:weather_app/screens/my_home_page.dart';
+import 'package:weather_app/service/get_user_location.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,114 +14,100 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MyHomePage(),
+      home: const GetStarted(),
       theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class GetStarted extends StatefulWidget {
+  const GetStarted({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<GetStarted> createState() => _GetStartedState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
-  Map<String, dynamic>? weatherData;
-
-  List<Widget>? _screens;
-
-  int _selectedIndex = 0;
-
-
-  Future<void> fetchWeatherData() async {
-    try {
-      Map<String, dynamic> data = await WeatherApi.getWeatherData();
-      setState(() {
-        weatherData = data;
-        _screens = [
-          Home(currentWeather: weatherData!['current']),
-          Search(),
-          Weather(),
-          Profile(),
-        ];
-      });
-    } catch (ex) {
-      print('Error: $ex');
-    }
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchWeatherData();
+class _GetStartedState extends State<GetStarted> {
+  bool permissionGranted = false;
+  Future<void> getLocationPermission() async{
+    bool permission = await GetUserLocation.getCurrentPosition();
+    setState(() {
+       permissionGranted = permission;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if(_screens == null){
-      return const Scaffold(
-        body:  Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: const Icon(
-            Icons.location_on_rounded,
-            color: Color(0xffA5C9CA),
-          ),
-          title: Text(
-            weatherData!['timezone'].toString(),
-            style: GoogleFonts.poppins(fontSize: 16),
-          ),
-        ),
-        body: Center(
-          child: _screens![_selectedIndex],
-        ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
-          child: Theme(
-            data: Theme.of(context).copyWith(
-              canvasColor: const Color(0x19ffffff),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: BottomNavigationBar(
-                items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home), label: "Home"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.search), label: "Search"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.assistant_navigation), label: "Weather"),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.person), label: "Profile"),
-                ],
-                currentIndex: _selectedIndex,
-                showUnselectedLabels: false,
-                showSelectedLabels: false,
-                selectedItemColor: const Color(0xffA5C9CA),
-                unselectedItemColor: Colors.white38,
-                elevation: 1,
-                onTap: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
+        child: Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        height: MediaQuery.of(context).size.height,
+        margin: const EdgeInsets.all(16),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 300,
+                width: 300,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://cdn-icons-png.flaticon.com/512/7063/7063733.png"),
+                        fit: BoxFit.fill)),
               ),
-            ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  "Discover the Weather in Your City",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      fontSize: 32, fontWeight: FontWeight.w600),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  "Get to know your weather maps and precipitation forecast",
+                  textAlign: TextAlign.center,
+                  style:
+                      GoogleFonts.poppins(fontSize: 20, color: Colors.white60),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  await getLocationPermission();
+                  print(permissionGranted);
+                  if (permissionGranted) {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                  } else {
+                    String status = GetUserLocation.info;
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(status, style: GoogleFonts.poppins(color: Colors.black,fontSize: 20),),backgroundColor: const Color(0xffE7F6F2),));
+                  }
+                },
+                child: Container(
+                  height: 60,
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Color(0xff395B64),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Text(
+                    "Get Started",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                        fontSize: 24, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
-    );
+    ));
   }
 }

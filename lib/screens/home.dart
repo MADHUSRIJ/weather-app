@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var temperature =  widget.currentWeather['temp'] - 273;
+    var temperature =  widget.currentWeather['main']['temp'] - 273;
     double roundedTemperature = temperature.floorToDouble();
     String formattedTemperature = roundedTemperature.toStringAsFixed(2);
     return SafeArea(
@@ -78,9 +78,9 @@ class _HomeState extends State<Home> {
                 alignment: Alignment.center,
                 child: Row(
                   children: [
-                    climateData("Pressure","${widget.currentWeather['pressure']} hPa", "https://cdn-icons-png.flaticon.com/512/2446/2446147.png"),
-                    climateData("Humidity","${widget.currentWeather['humidity']} %", "https://cdn-icons-png.flaticon.com/512/6244/6244299.png"),
-                    climateData("Wind Speed","${widget.currentWeather['wind_speed']} m/s", "https://cdn-icons-png.flaticon.com/512/3579/3579552.png"),
+                    climateData("Pressure","${widget.currentWeather['main']['pressure']} hPa", "https://cdn-icons-png.flaticon.com/512/2446/2446147.png"),
+                    climateData("Humidity","${widget.currentWeather['main']['humidity']} %", "https://cdn-icons-png.flaticon.com/512/6244/6244299.png"),
+                    climateData("Wind Speed","${widget.currentWeather['wind']['speed']} m/s", "https://cdn-icons-png.flaticon.com/512/3579/3579552.png"),
                   ],
                 ),
               ),
