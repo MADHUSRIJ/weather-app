@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+
 import 'package:weather_app/service/get_user_location.dart';
 import 'package:weather_app/service/get_weather_api.dart';
 

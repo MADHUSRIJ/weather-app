@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/screens/home.dart';
 import 'package:weather_app/screens/search.dart';
 import 'package:weather_app/screens/weather.dart';
-import 'package:weather_app/service/get_user_location.dart';
 
+import 'package:weather_app/service/get_user_location.dart';
 import 'package:weather_app/service/get_weather_api.dart';
 
 class MyHomePage extends StatefulWidget {

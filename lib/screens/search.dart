@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:weather_app/service/get_weather_api.dart';
 
 class Search extends StatefulWidget {
